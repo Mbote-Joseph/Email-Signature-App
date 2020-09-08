@@ -26,7 +26,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {CdkScrollableModule} from '@angular/cdk/scrolling';
 import {ScrollingModule } from '@angular/cdk/scrolling';
 import {ClipboardModule} from '@angular/cdk/clipboard';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'; 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { BodyComponent } from './body/body.component';
+import { FooterComponent } from './footer/footer.component'; 
 @NgModule({
     imports: [
         BrowserModule,
@@ -53,7 +55,9 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         AlertComponent,
         HomeComponent,
         CreateComponent,
-        TemplatesComponent
+        TemplatesComponent,
+        BodyComponent,
+        FooterComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
