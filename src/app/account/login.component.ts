@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '../_services';
+import { User } from '../_models/user';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -54,5 +55,13 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                 }
             });
+    }
+    user: User;
+
+
+    
+
+    logout() {
+        this.accountService.logout();
     }
 }

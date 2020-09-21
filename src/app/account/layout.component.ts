@@ -2,6 +2,7 @@
 import { Router } from '@angular/router';
 
 import { AccountService } from '../_services';
+import { User } from '../_models/user';
 
 @Component({ templateUrl: 'layout.component.html' })
 export class LayoutComponent {
@@ -13,5 +14,13 @@ export class LayoutComponent {
         if (this.accountService.userValue) {
             this.router.navigate(['/']);
         }
+    }
+    user: User;
+
+
+    
+
+    logout() {
+        this.accountService.logout();
     }
 }
