@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { User } from 'src/app/_models';
 import { AccountService } from 'src/app/_services';
+import { NgForm } from '@angular/forms';
+import {Users } from '../../Users.model';
+import { UserService } from '../../shared/user.service';
 
 @Component({
   selector: 'app-create',
@@ -8,6 +11,10 @@ import { AccountService } from 'src/app/_services';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
+   @ViewChild ('form') generalForm:NgForm;
+
+  users: Users[] = [];
+  submitted=false;
   user: User;
 
 
@@ -31,7 +38,7 @@ export class CreateComponent implements OnInit {
   value:any='';
   
 
-  constructor(private accountService: AccountService) {
+  constructor(private accountService: AccountService, private userService: UserService) {
       // this.user = this.accountService.userValue;
       this.accountService.user.subscribe(x => this.user = x);
   }
@@ -42,7 +49,26 @@ export class CreateComponent implements OnInit {
       this.accountService.logout();
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
+   this.userService.fetchUser().subscribe(posts=>{
+      this.users=posts;
+    });
+  }
+  onSubmit(userData: Users){
+   this.userService.createUser(userData.name, userData.company, userData.position, userData.department, userData.phone, userData.mobile, userData.website, userData.skype, userData.email, userData.address);
+    //console.log(this.generalForm);
+    this.generalForm.reset();
+    
+  }
+  onfetchPosts(){
+   this.userService.fetchUser().subscribe(posts=>{
+     this.users=posts;
+   });
+  }
+  onClearUsers(){
+    this.userService.deleteUser().subscribe(()=>{
+      this.users=[];
+    })
   }
 
   reviewFunction(){

@@ -102,7 +102,7 @@
       
       <ngb-tab title="General">
         <ng-template ngbTabContent>
-            <form style="margin:10%">
+            <form  (ngSubmit)="onSubmit(form.value)" #form="ngForm" style="margin:10%">
                                 
                 <div id="user-data" >
                     <div class="form-group">
@@ -206,6 +206,7 @@
                         name="address">
                     </div>
                 </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
         </ng-template>
       </ngb-tab>
