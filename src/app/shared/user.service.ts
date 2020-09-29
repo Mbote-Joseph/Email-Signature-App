@@ -16,7 +16,7 @@ export class UserService {
 
 
   createUser(name: string, company: string, position: string, department: string, phone:string, mobile: string, website: string, skype: string, email: string, address: string) {
-    const postUser : Users = {name:name, company:company, position:position, department:department, phone:phone, mobile:mobile, website:website, skype:skype, email:email, address};
+    const postUser : Users = {name:name, company:company, position:position, department:department, phone:phone, mobile:mobile, website:website, skype:skype, email:email, address:address};
     this.http.post<{data:string }>('https://emailsignature-1aa20.firebaseio.com/posts.json', postUser,  {
       observe: 'response'
     })

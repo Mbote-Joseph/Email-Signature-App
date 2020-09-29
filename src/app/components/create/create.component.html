@@ -214,7 +214,7 @@
       <ngb-tab>
         <ng-template ngbTabTitle>Images</ng-template>
         <ng-template ngbTabContent>
-            <form style="margin:10%">
+            <form #formImage="ngForm"style="margin:10%">
                 <h2>Image Link</h2>
                             <div id="user-data" >
                                 <div class="form-group" >
@@ -237,6 +237,7 @@
                                     name="bannerUrl">
                                 </div>
                             </div>
+                            <button class="btn btn-primary" type="submit">Submit</button>
             </form>
         </ng-template>
       </ngb-tab>
@@ -245,10 +246,10 @@
         <ng-template ngbTabTitle>Social Media</ng-template>
         <ng-template ngbTabContent>
            
-            <form style="margin:10%"> 
+            <form (ngSubmit)="onSubmitSocial(formSocialMedia.value)" #formSocialMedia="ngForm" style="margin:10%"> 
                 <div id="user-data">
                     <div class="form-group" >
-                        <label for="facebookLink"> <img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></label>
+                        <label for="facebookLink"> Facebook<img src="https://img.icons8.com/fluent/50/000000/facebook-new.png"/></label>
                         <input type="text"
                         id="facebookLink"
                         class="form-control"
@@ -258,7 +259,7 @@
                     </div>
                     <div id="user-data">
                         <div class="form-group" >
-                            <label for="instagramLink">  <img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/>
+                            <label for="instagramLink"> Instagram <img src="https://img.icons8.com/fluent/48/000000/instagram-new.png"/>
                             </label>
                             <input type="text"
                             id="instagramLink"
@@ -269,7 +270,7 @@
                     </div>
                     <div id="user-data">
                         <div class="form-group" >
-                            <label for="twitterLink"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></label>
+                            <label for="twitterLink">Twitter<img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></label>
                             <input type="text"
                             id="twitterLink"
                             class="form-control"
@@ -280,7 +281,7 @@
                     
                     <div id="user-data">
                         <div class="form-group" >
-                            <label for="linkedinLink">  <img src="https://img.icons8.com/doodle/48/000000/linkedin--v2.png"/>
+                            <label for="linkedinLink">LinkedIn  <img src="https://img.icons8.com/doodle/48/000000/linkedin--v2.png"/>
                             </label>
                             <input type="text"
                             id="linkedinLink"

@@ -4,6 +4,11 @@ import { AccountService } from 'src/app/_services';
 import { NgForm } from '@angular/forms';
 import {Users } from '../../Users.model';
 import { UserService } from '../../shared/user.service';
+import { TemplateService } from '../../shared/template.service';
+import { SocialService } from '../../shared/social.service';
+import { from } from 'rxjs';
+import { Templates } from 'src/app/templates.model';
+import { Social } from 'src/app/social.model';
 
 @Component({
   selector: 'app-create',
@@ -12,10 +17,15 @@ import { UserService } from '../../shared/user.service';
 })
 export class CreateComponent implements OnInit {
    @ViewChild ('form') generalForm:NgForm;
+   @ViewChild('formSocialMedia') socialForm:NgForm;
 
   users: Users[] = [];
+  templates: Templates[]= [];
+  social: Social[]=[];
   submitted=false;
   user: User;
+  template: Templates;
+  socials: Social;
 
 
 
@@ -38,7 +48,7 @@ export class CreateComponent implements OnInit {
   value:any='';
   
 
-  constructor(private accountService: AccountService, private userService: UserService) {
+  constructor(private accountService: AccountService, private userService: UserService, private templateService: TemplateService, private socialService: SocialService ) {
       // this.user = this.accountService.userValue;
       this.accountService.user.subscribe(x => this.user = x);
   }
@@ -53,6 +63,14 @@ export class CreateComponent implements OnInit {
    this.userService.fetchUser().subscribe(posts=>{
       this.users=posts;
     });
+
+    this.templateService.fetchTemplate().subscribe(posts=>{
+       this.template=posts;
+    });
+
+    this.socialService.fetchSocial().subscribe(posts=>{
+       this.socials=posts;
+    })
   }
   onSubmit(userData: Users){
    this.userService.createUser(userData.name, userData.company, userData.position, userData.department, userData.phone, userData.mobile, userData.website, userData.skype, userData.email, userData.address);
@@ -60,13 +78,53 @@ export class CreateComponent implements OnInit {
     this.generalForm.reset();
     
   }
+
   onfetchPosts(){
    this.userService.fetchUser().subscribe(posts=>{
      this.users=posts;
    });
   }
+
   onClearUsers(){
     this.userService.deleteUser().subscribe(()=>{
+      this.users=[];
+    })
+  }
+
+  onSubmitSocial(socialData: Social){
+   this.socialService.createSocial(socialData.facebook, socialData.instagram, socialData.twitter, socialData.linkedin);
+    console.log(this.socialForm);
+    this.socialForm.reset();
+    
+  }
+
+  onfetchSocial(){
+   this.socialService.fetchSocial().subscribe(posts=>{
+     this.users=posts;
+   });
+  }
+  
+  onClearSocial(){
+    this.socialService.deleteSocial().subscribe(()=>{
+      this.users=[];
+    })
+  }
+
+  onSubmitTemplate(templateData: Templates){
+   this.templateService.createTemplate(templateData.template);
+    //console.log(this.generalForm);
+    this.socialForm.reset();
+    
+  }
+
+  onfetchTemplate(){
+   this.templateService.fetchTemplate().subscribe(posts=>{
+     this.users=posts;
+   });
+  }
+  
+  onClearTemplate(){
+    this.templateService.deleteTemplate().subscribe(()=>{
       this.users=[];
     })
   }
